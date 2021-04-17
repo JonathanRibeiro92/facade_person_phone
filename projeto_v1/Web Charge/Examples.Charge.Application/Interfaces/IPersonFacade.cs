@@ -12,5 +12,6 @@ namespace Examples.Charge.Application.Interfaces
         Task<PersonPhoneResponse> UpdatePersonPhone(int id, PersonPhoneDto personPhone);
         Task<PersonPhoneResponse> RemovePersonPhone(PersonPhoneDto personPhone);
         Task<PersonResponse> FindPerson(int id);
+        Task<PersonResponse> RemovePerson(int id);
     }
 }

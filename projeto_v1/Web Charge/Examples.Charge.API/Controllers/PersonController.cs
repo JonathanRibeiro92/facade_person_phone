@@ -27,26 +27,46 @@ namespace Examples.Charge.API.Controllers
             return Response(await _facade.FindPerson(id));
         }
 
+        
+        [HttpPut]
+        public IActionResult Put([FromBody] PersonRequest request)
+        {
+            return Response(0, null);
+        }
+
+        [HttpPost]
+        public IActionResult Post([FromBody] PersonRequest request)
+        {
+            return Response(0, null);
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete([FromBody] PersonRequest request)
+        {
+            return Response(await _facade.RemovePerson(request.Id));
+        }
+
         [HttpGet("phone/{id}")]
         public async Task<ActionResult<PersonPhoneResponse>> GetPhone(int id)
         {
             return Response(await _facade.FindPersonPhone(id));
         }
 
-        [HttpPut]
-        public IActionResult Put([FromBody] ExampleRequest request)
+
+        [HttpPut("phone")]
+        public IActionResult PutTelefone([FromBody] PersonRequest request)
         {
             return Response(0, null);
         }
 
-        [HttpPost]
-        public IActionResult Post([FromBody] ExampleRequest request)
+        [HttpPost("phone")]
+        public IActionResult PostTelefone([FromBody] PersonRequest request)
         {
             return Response(0, null);
         }
 
-        [HttpDelete]
-        public IActionResult Delete([FromBody] ExampleRequest request)
+        [HttpDelete("phone")]
+        public IActionResult DeletePhone([FromBody] PersonRequest request)
         {
             return Response(0, null);
         }

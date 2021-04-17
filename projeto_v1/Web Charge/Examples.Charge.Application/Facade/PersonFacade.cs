@@ -56,6 +56,30 @@ namespace Examples.Charge.Application.Facade
             return response;
         }
 
+        public async Task<PersonResponse> RemovePerson(int id)
+        {
+            var result = await _personService.Find(id);
+
+            if (result == null)
+                return null;
+
+            var response = new PersonResponse()
+            {
+                PersonObject = new PersonDto()
+                {
+                    BusinessEntityID = result.BusinessEntityID,
+                    Name = result.Name,
+                    Phones = new List<PersonPhoneDto>()
+                }
+            };
+
+            response.PersonObject.Phones.AddRange(result.Phones.Select(x => _mapper.Map<PersonPhoneDto>(x)));
+
+            await _personService.Remove(result);
+
+            return response;
+        }
+
         public async Task<PersonPhoneResponse> FindPersonPhone(int id)
         {
             var result = await _personPhoneService.Find(id);

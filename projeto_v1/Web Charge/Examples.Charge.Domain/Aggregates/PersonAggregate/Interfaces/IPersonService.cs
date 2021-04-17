@@ -9,5 +9,6 @@ namespace Examples.Charge.Domain.Aggregates.PersonAggregate.Interfaces
     {
         Task<List<Person>> FindAllAsync();
         Task<Person> Find(int id);
+        Task Remove(Person person);
     }
 }

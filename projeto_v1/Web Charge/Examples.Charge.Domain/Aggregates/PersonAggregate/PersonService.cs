@@ -21,6 +21,12 @@ namespace Examples.Charge.Domain.Aggregates.PersonAggregate
             return await _personRepository.FindById(id);
         }
 
+        public async Task Remove(Person person)
+        {
+            await _personRepository.Remove(person);
+        }
+
+
         public void Dispose()
         {
             _personRepository?.Dispose();

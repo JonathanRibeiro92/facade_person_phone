@@ -80,6 +80,17 @@ namespace Examples.Charge.Application.Facade
             return response;
         }
 
+        public async Task<PersonPhoneListResponse> FindAllPersonPhone()
+        {
+            var result = await _personPhoneService.FindAllAsync();
+            var response = new PersonPhoneListResponse
+            {
+                PersonPhoneObjects = new List<PersonPhoneDto>()
+            };
+            response.PersonPhoneObjects.AddRange(result.Select(x => _mapper.Map<PersonPhoneDto>(x)));
+            return response;
+        }
+
         public async Task<PersonPhoneResponse> FindPersonPhone(int id)
         {
             var result = await _personPhoneService.Find(id);
@@ -156,9 +167,9 @@ namespace Examples.Charge.Application.Facade
 
         }
 
-        public async Task<PersonPhoneResponse> RemovePersonPhone(PersonPhoneDto personPhone)
+        public async Task<PersonPhoneResponse> RemovePersonPhone(int id)
         {
-            var removedPersonPhone = await _personPhoneService.Find(x => x.BusinessEntityID == personPhone.BusinessEntityID);
+            var removedPersonPhone = await _personPhoneService.Find(x => x.BusinessEntityID == id);
 
             var response = new PersonPhoneResponse
             {

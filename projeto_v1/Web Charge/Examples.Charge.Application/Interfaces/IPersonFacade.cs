@@ -10,8 +10,9 @@ namespace Examples.Charge.Application.Interfaces
         Task<PersonPhoneResponse> FindPersonPhone(int id);
         Task<PersonPhoneResponse> AddPersonPhone(PersonPhoneDto personPhone);
         Task<PersonPhoneResponse> UpdatePersonPhone(int id, PersonPhoneDto personPhone);
-        Task<PersonPhoneResponse> RemovePersonPhone(PersonPhoneDto personPhone);
         Task<PersonResponse> FindPerson(int id);
         Task<PersonResponse> RemovePerson(int id);
+        Task<PersonPhoneListResponse> FindAllPersonPhone();
+        Task<PersonPhoneResponse> RemovePersonPhone(int id);
     }
 }

@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Examples.Charge.Application.Interfaces;
 using Examples.Charge.Application.Messages.Request;
 using Examples.Charge.Application.Messages.Response;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace Examples.Charge.API.Controllers
 {
@@ -44,31 +44,6 @@ namespace Examples.Charge.API.Controllers
         public async Task<IActionResult> Delete([FromBody] PersonRequest request)
         {
             return Response(await _facade.RemovePerson(request.Id));
-        }
-
-        [HttpGet("phone/{id}")]
-        public async Task<ActionResult<PersonPhoneResponse>> GetPhone(int id)
-        {
-            return Response(await _facade.FindPersonPhone(id));
-        }
-
-
-        [HttpPut("phone")]
-        public IActionResult PutTelefone([FromBody] PersonRequest request)
-        {
-            return Response(0, null);
-        }
-
-        [HttpPost("phone")]
-        public IActionResult PostTelefone([FromBody] PersonRequest request)
-        {
-            return Response(0, null);
-        }
-
-        [HttpDelete("phone")]
-        public IActionResult DeletePhone([FromBody] PersonRequest request)
-        {
-            return Response(0, null);
         }
     }
 }

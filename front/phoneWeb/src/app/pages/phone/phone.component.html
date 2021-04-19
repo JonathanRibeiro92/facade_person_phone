@@ -1,3 +1,66 @@
-<p>
-  phone works!
-</p>
+<div>
+  <form [formGroup]="phoneForm"(ngSubmit)="onFormSubmit()">
+    <div class = "container" style="padding: 5%;">
+      <div class=" col form-group">
+          <mat-form-field style="width:80%;" >
+            <input formControlName="Numero" matTooltip="Informe o número de Telefone" matInput placeholder="Número do telefone">
+          </mat-form-field>
+          <mat-error>
+            <span *ngIf="!phoneForm.get('Numero').value && phoneForm.get('Numero').touched"></span>
+          </mat-error>
+          <mat-radio-group formControlName="Tipo" matTooltip="Informe o tipo de telefone">
+            <mat-radio-button value="1">Residencial</mat-radio-button>
+            <mat-radio-button value="2">Celular</mat-radio-button>
+          </mat-radio-group>
+          <div class="row">
+            <div style="padding: 10px;">
+              <button type="submit" mat-raised-button color="accent"matTooltip="Clique no botão Enviar"[disabled]="!phoneForm.valid">Enviar</button>
+            </div>
+            <div style="padding: 10px;">
+              <button class="btn btn-secondary" type="reset" mat-raised-button matTooltip="Clique no botão Resetar" (click)="resetForm()">Resetar</button>
+            </div>
+
+          <p *ngIf="dataSaved || phoneNaoEncontrado" style="color:rgb(55, 0, 128);font-size:20px;font-weight:bold" Class="success" align="left">
+            {{message}}
+          </p>
+          </div>
+      </div>
+      <div class="col form-group">
+        <div class="row">
+          <mat-form-field style="width:80%;">
+            <input #campoBusca matTooltip="Pesquisar telefone" matInput placeholder="Busca" >
+          </mat-form-field>
+          <button mat-icon-button class="btn btn-outline-secondary" type="button" matTooltip="Clique no botão" (click) ="pesquisarPhone(campoBusca.value)">
+            <mat-icon>search</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+      <br><br>
+      <div class="table-responsive-sm">
+        <table class="table" >
+          <tr ngclass="btn-primary">
+            <th>
+              Número do Telefone
+            </th>
+            <th>
+              Tipo Telefone
+            </th>
+            <th>Edita</th>
+            <th>Deleta</th>
+          </tr>
+          <tr *ngFor="let phone of allPhones | async ;">
+            <td>{{phone.BusinessEntityID}}</td>
+            <td>{{phone.PhoneNumber}}</td>
+            <td>{{phone.PhoneNumberType}}</td>
+            <td>
+              <button type="button" class="btn btn-info"matTooltip="Clique no botão para Editar"(click)="loadPhoneToEdit(phone.BusinessEntityID)">Editar</button>
+            </td>
+            <td>
+              <button type="button" class="btn btn-danger"matTooltip="Clique no botão para Deletar"(click)="deletePhone(phone.BusinessEntityID)">Deletar</button>
+            </td>
+          </tr>
+        </table>
+      </div>
+  </form>
+  </div>
